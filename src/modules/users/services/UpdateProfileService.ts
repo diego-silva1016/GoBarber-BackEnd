@@ -45,7 +45,7 @@ class UpdateProfileService {
       throw new AppError('You need to inform the old password.');
 
     if (password && old_password) {
-      if (!(await this.hashProvider.compareHash(user.password, old_password)))
+      if (!(await this.hashProvider.compareHash(old_password, user.password)))
         throw new AppError('Old password does not match.');
 
       user.password = await this.hashProvider.generateHash(password);
